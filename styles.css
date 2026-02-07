@@ -1,0 +1,342 @@
+/* =================================
+   Custom Variables
+   ================================= */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #1abc9c;
+    --light-bg: #f8f9fa;
+    --text-color: #333;
+    --text-light: #6c757d;
+}
+
+/* =================================
+   Global Styles
+   ================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* =================================
+   Navigation
+   ================================= */
+.navbar {
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--primary-color) !important;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-color) !important;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent-color) !important;
+}
+
+/* =================================
+   Hero Section
+   ================================= */
+.hero-section {
+    padding-top: 70px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.hero-section h1 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.hero-section .lead {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.hero-section p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.btn-dark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline-dark {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* =================================
+   Portfolio Section
+   ================================= */
+#portfolio {
+    background-color: #ffffff;
+}
+
+.portfolio-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-image-placeholder {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.portfolio-image-placeholder .placeholder-content {
+    text-align: center;
+    color: white;
+}
+
+.portfolio-image-placeholder i {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.portfolio-image-placeholder p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+/* =================================
+   About Section
+   ================================= */
+#about {
+    background-color: var(--light-bg);
+}
+
+.about-image-placeholder {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.about-image-placeholder .placeholder-content {
+    text-align: center;
+    color: white;
+}
+
+.about-image-placeholder i {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.about-image-placeholder p {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+#about h2 {
+    color: var(--primary-color);
+}
+
+#about .lead {
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* =================================
+   Contact Section
+   ================================= */
+#contact {
+    background-color: #ffffff;
+}
+
+#contact h2 {
+    color: var(--primary-color);
+}
+
+.contact-form .form-label {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.contact-form .form-control {
+    border: 2px solid #e9ecef;
+    padding: 0.75rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.contact-form .form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.15);
+}
+
+/* =================================
+   Footer
+   ================================= */
+footer {
+    background-color: var(--primary-color) !important;
+}
+
+footer p {
+    font-size: 0.95rem;
+}
+
+/* =================================
+   Responsive Design
+   ================================= */
+@media (max-width: 991px) {
+    .navbar-nav {
+        margin-top: 1rem;
+        text-align: center;
+    }
+    
+    .nav-link {
+        margin: 0.5rem 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1.2rem;
+    }
+    
+    .about-image-placeholder {
+        height: 300px;
+    }
+    
+    .portfolio-image-placeholder {
+        height: 200px;
+    }
+}
+
+/* =================================
+   Smooth Scrolling
+   ================================= */
+html {
+    scroll-behavior: smooth;
+}
+
+/* =================================
+   Utility Classes
+   ================================= */
+.section-padding {
+    padding: 5rem 0;
+}
+
+.text-accent {
+    color: var(--accent-color);
+}
+
+.bg-accent {
+    background-color: var(--accent-color);
+}
