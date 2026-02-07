@@ -2,11 +2,11 @@
    Custom Variables
    ================================= */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #34495e;
-    --accent-color: #1abc9c;
+    --primary-color: #F5E6D1;
+    --secondary-color: #bc8488;
+    --accent-color: #6E2E34;
     --light-bg: #f8f9fa;
-    --text-color: #333;
+    --text-color: #AA6754;
     --text-light: #6c757d;
 }
 
@@ -20,13 +20,14 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Bodoni', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Ballet', serif;
+    color: var(--secondary-color);
     font-weight: 700;
     line-height: 1.2;
 }
@@ -40,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-brand {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Ballet', serif;
     font-size: 1.5rem;
     color: var(--primary-color) !important;
     letter-spacing: 0.5px;
@@ -51,6 +52,14 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-color) !important;
     margin: 0 0.5rem;
     transition: color 0.3s ease;
+}
+
+.navbar-toggler{
+    border-color: var(--primary-color);
+}
+
+.navbar-toggler-icon{
+    background-image: var(--bs-navbar-toggler-icon-bg);
 }
 
 .nav-link:hover,
@@ -90,6 +99,10 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.3s ease;
 }
 
+.me-3{
+    margin-right: 0!important;
+}
+
 .btn-dark:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
@@ -116,7 +129,8 @@ h1, h2, h3, h4, h5, h6 {
    Portfolio Section
    ================================= */
 #portfolio {
-    background-color: #ffffff;
+    background-color: #B46C72;
+    color: var(--light-bg);
 }
 
 .portfolio-card {
