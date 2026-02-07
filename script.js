@@ -19,11 +19,33 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Update active nav link on scroll
-window.addEventListener('scroll', () => {
+// Throttle function for scroll events
+function throttle(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Combined scroll handler for better performance
+const handleScroll = throttle(() => {
     const sections = document.querySelectorAll('section[id]');
     const scrollPosition = window.scrollY + 100;
+    const navbar = document.querySelector('.navbar');
 
+    // Update navbar shadow
+    if (window.scrollY > 50) {
+        navbar.classList.add('shadow');
+    } else {
+        navbar.classList.remove('shadow');
+    }
+
+    // Update active nav link
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
@@ -38,17 +60,9 @@ window.addEventListener('scroll', () => {
             });
         }
     });
-});
+}, 100);
 
-// Add shadow to navbar on scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('shadow');
-    } else {
-        navbar.classList.remove('shadow');
-    }
-});
+window.addEventListener('scroll', handleScroll);
 
 // Form submission handler (prevents default for now)
 const contactForm = document.querySelector('.contact-form');
@@ -63,12 +77,32 @@ if (contactForm) {
         const message = document.getElementById('message').value;
         
         // Here you would typically send the form data to a server
-        // For now, just show an alert
-        alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
+        // For now, show a success message in the page
+        showFormMessage(`Thank you for your message, ${name}! I'll get back to you soon.`, 'success');
         
         // Reset form
         contactForm.reset();
     });
+}
+
+// Function to show form feedback message
+function showFormMessage(message, type) {
+    // Create message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+    messageDiv.setAttribute('role', 'alert');
+    messageDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    // Insert after form
+    contactForm.parentNode.insertBefore(messageDiv, contactForm.nextSibling);
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+        messageDiv.remove();
+    }, 5000);
 }
 
 // Add animation on scroll (fade in elements)
