@@ -664,6 +664,10 @@
   #experience {
     background: var(--blush);
   }
+
+  #experience .section-label::after{
+    background: var(--mid);
+  }
   
   .exp-list {
     display: flex;
@@ -741,11 +745,11 @@
   }
   
   #skills .section-label {
-    color: rgba(245, 230, 209, 0.6);
+    color: var(--mid);
   }
   
   #skills .section-label::after {
-    background: var(--ink);
+    background: var(--mid);
   }
   
   #skills .section-title {
