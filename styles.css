@@ -8,11 +8,11 @@
   }
   
   :root {
-    --pink:   #AA6754;
-    --rose:   #bc8488;
-    --deep:   #6E2E34;
+    --pink:   #d0b0b1;
+    --rose:   #FFD9DA;
+    --deep:   #E296B2;
     --blush:  #F5E6D1;
-    --ink:    #1a0f0f;
+    --ink:    #3c3a3a;
     --mid:    #8a6560;
     --paper:  #faf5f0;
     --accent: #c8392b;
@@ -183,7 +183,7 @@
   
   .nav-logo-name em {
     font-style: normal;
-    color: var(--accent);
+    color: var(--deep);
   }
   
   .nav-logo-sub {
@@ -387,6 +387,7 @@
     padding: 1.4rem 3.2rem;
     font-family: 'DM Mono', monospace;
     font-size: 0.8rem;
+    font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     text-decoration: none;
@@ -487,6 +488,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2px;
+  }
+
+  #selected-work{
+    padding-top: 6rem;
   }
   
   .work-card {
@@ -740,11 +745,11 @@
   }
   
   #skills .section-label::after {
-    background: var(--blush);
+    background: var(--ink);
   }
   
   #skills .section-title {
-    color: var(--blush);
+    color: var(--ink);
   }
   
   .skills-grid {
@@ -763,7 +768,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: rgba(245, 230, 209, 0.5);
+    color: var(--ink);
     margin-bottom: 2.4rem;
   }
   
@@ -777,7 +782,7 @@
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.8rem;
-    color: var(--blush);
+    color: var(--ink);
     line-height: 1;
   }
   
@@ -945,6 +950,10 @@
   
     .section {
       padding: 8rem 2rem;
+    }
+
+    #selected-work{
+      padding-top: 4rem;
     }
   
     .hero {
