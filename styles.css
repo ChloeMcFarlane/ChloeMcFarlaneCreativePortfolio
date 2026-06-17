@@ -908,6 +908,10 @@
    Work Card — Preview Popup
    ================================= */
 
+  /* =================================
+   Work Card — Preview Popup
+   ================================= */
+
 .work-preview-popup {
   position: fixed;
   width: 400px;
@@ -925,12 +929,29 @@
     0 12px 40px rgba(60, 58, 58, 0.18),
     0 2px 8px rgba(60, 58, 58, 0.08);
   background: var(--paper);
-  /* Sits below cursor + cursor-ring (9998/9999) but above everything else */
 }
 
+/* This was missing: Activates visibility globally when triggered */
 .work-preview-popup.visible {
   opacity: 1;
   transform: scale(1) translateY(0);
+}
+
+/* Mobile Fallback: Center the popup on small screens */
+@media (max-width: 900px) {
+  .work-preview-popup {
+    width: 85vw;
+    height: 60vw;
+    max-width: 400px;
+    max-height: 300px;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+  
+  .work-preview-popup.visible {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .work-preview-popup img {

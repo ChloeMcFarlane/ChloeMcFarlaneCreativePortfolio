@@ -84,7 +84,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // =================================
 // Work Card Preview Popup
 // =================================
-
 (function () {
   // Create the single shared popup element
   const popup = document.createElement('div');
@@ -101,9 +100,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   let mouseX = 0, mouseY = 0;
   let activeCard = null;
+  let isMobile = false;
 
-  // Track mouse position globally
+  // Simple check to evaluate device interaction capability
+  const checkDevice = () => {
+    isMobile = window.matchMedia('(max-width: 900px)').matches || ('ontouchstart' in window);
+  };
+  checkDevice();
+  window.addEventListener('resize', checkDevice);
+
+  // Track mouse position globally (Desktop ONLY logic)
   document.addEventListener('mousemove', e => {
+    if (isMobile) return;
     mouseX = e.clientX;
     mouseY = e.clientY;
     if (activeCard) positionPopup();
@@ -126,9 +134,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     popup.style.top  = y + 'px';
   }
 
+  // Close popup globally when tapping outside on mobile
+  document.addEventListener('touchstart', e => {
+    if (!isMobile) return;
+    if (!e.target.closest('.work-card') && !e.target.closest('.work-preview-popup')) {
+      popup.classList.remove('visible');
+      activeCard = null;
+    }
+  });
+
   // Attach listeners to every work card that has a data-preview attribute
   document.querySelectorAll('.work-card[data-preview]').forEach(card => {
+    
+    // DESKTOP: Hover States
     card.addEventListener('mouseenter', () => {
+      if (isMobile) return;
       const src   = card.dataset.preview;
       const label = card.dataset.previewLabel || '';
       popupImg.src     = src;
@@ -140,8 +160,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 
     card.addEventListener('mouseleave', () => {
+      if (isMobile) return;
       activeCard = null;
       popup.classList.remove('visible');
+    });
+
+    // MOBILE: Intercept touch click step
+    card.addEventListener('click', e => {
+      if (!isMobile) return;
+
+      // If this card isn't active yet, show the preview first and prevent navigation
+      if (activeCard !== card) {
+        e.preventDefault();
+        
+        const src   = card.dataset.preview;
+        const label = card.dataset.previewLabel || '';
+        popupImg.src     = src;
+        popupImg.alt     = label;
+        popupLabel.textContent = label;
+        
+        activeCard = card;
+        popup.classList.add('visible');
+      }
+      // If it's already active, a second tap follows through with the default link navigation
     });
   });
 })();
