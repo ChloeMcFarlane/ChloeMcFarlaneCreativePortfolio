@@ -79,3 +79,69 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+
+// =================================
+// Work Card Preview Popup
+// =================================
+
+(function () {
+  // Create the single shared popup element
+  const popup = document.createElement('div');
+  popup.className = 'work-preview-popup';
+  popup.innerHTML = `<img src="" alt="" /><div class="work-preview-label"></div>`;
+  document.body.appendChild(popup);
+
+  const popupImg   = popup.querySelector('img');
+  const popupLabel = popup.querySelector('.work-preview-label');
+
+  // Offset from the cursor so it doesn't sit directly under it
+  const OFFSET_X = 24;
+  const OFFSET_Y = -320; // above the cursor by default
+
+  let mouseX = 0, mouseY = 0;
+  let activeCard = null;
+
+  // Track mouse position globally
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (activeCard) positionPopup();
+  });
+
+  function positionPopup() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const pw = 400, ph = 300;
+
+    let x = mouseX + OFFSET_X;
+    let y = mouseY + OFFSET_Y;
+
+    // Flip horizontally if too close to the right edge
+    if (x + pw > vw - 12) x = mouseX - pw - OFFSET_X;
+    // Flip vertically if too close to the top edge
+    if (y < 12) y = mouseY + 20;
+
+    popup.style.left = x + 'px';
+    popup.style.top  = y + 'px';
+  }
+
+  // Attach listeners to every work card that has a data-preview attribute
+  document.querySelectorAll('.work-card[data-preview]').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const src   = card.dataset.preview;
+      const label = card.dataset.previewLabel || '';
+      popupImg.src     = src;
+      popupImg.alt     = label;
+      popupLabel.textContent = label;
+      activeCard = card;
+      positionPopup();
+      popup.classList.add('visible');
+    });
+
+    card.addEventListener('mouseleave', () => {
+      activeCard = null;
+      popup.classList.remove('visible');
+    });
+  });
+})();
