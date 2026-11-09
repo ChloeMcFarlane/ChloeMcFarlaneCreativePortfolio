@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Chloe M. Studio</title>
+  <meta name="description" content="Web developer, UI/UX and brand designer in Brooklyn, NY. Custom-coded portfolios and websites built around your brand."/>
+  <meta name="theme-color" content="#E296B2"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Chloe M. Studio"/>
+  <meta property="og:description" content="Web developer, UI/UX and brand designer in Brooklyn, NY. Custom-coded portfolios and websites built around your brand."/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23E296B2'/%3E%3Ctext x='32' y='46' font-size='42' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-weight='bold' fill='%23F5E6D1'%3EC%3C/text%3E%3C/svg%3E"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Mono:wght@300;400;500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
 
@@ -32,6 +38,7 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="services.html">Services</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -41,7 +48,7 @@
     <div class="hero-bg"></div>
     <div class="hero-bg-text">C</div>
     <div class="hero-content">
-      <div class="hero-eyebrow">Est. 2026 <span>·</span> Brooklyn, NY <span>·</span> Boston University</div>
+      <div class="hero-eyebrow">Est. 2026 <span>·</span> Brooklyn, NY <span>·</span> Boston University Graduate</div>
       <h1 class="hero-title">
         <span class="hero-title-line"><span>Chloe</span></span>
         <span class="hero-title-line"><span class="accent">M.</span></span>
@@ -120,7 +127,7 @@
   
   <div class="section-label" id="selected-work">Selected Work</div>
     <div class="work-grid">
-      <a class="work-card reveal reveal-delay-3"
+      <a class="work-card reveal reveal-delay-1"
          href="https://hamlettfilms.com" target="_blank"
          data-preview="previews/hamlett-films.png"
          data-preview-label="Hamlett Films · Web Dev">
@@ -135,13 +142,28 @@
           <div class="work-card-arrow">↗</div>
         </div>
       </a>
-      <a class="work-card reveal reveal-delay-4"
+      <a class="work-card reveal reveal-delay-2"
+      href="https://github.com/RaisinBranLvr/cs411-thrift-store.git" target="_blank"
+      data-preview="previews/deadstock.jpg"
+      data-preview-label="Deadstock · TypeScript">
+     <div class="work-card-hover-text">DSK</div>
+     <div class="work-card-top">
+       <span class="work-card-number">02</span>
+       <span class="work-card-tag">Sustainability · TypeScript</span>
+     </div>
+     <div class="work-card-bottom">
+       <div class="work-card-title">Deadstock</div>
+       <div class="work-card-desc">Thrifting platform gamifying environmental impact through CO₂ savings tracking — connecting sustainable shoppers with curated fashion.</div>
+       <div class="work-card-arrow">↗</div>
+     </div>
+   </a>
+      <a class="work-card reveal reveal-delay-3"
          href="https://mocada.org" target="_blank"
          data-preview="previews/mocada.jpg"
          data-preview-label="MoCADA · WordPress">
         <div class="work-card-hover-text">MCA</div>
         <div class="work-card-top">
-          <span class="work-card-number">02</span>
+          <span class="work-card-number">03</span>
           <span class="work-card-tag">Museum · WordPress</span>
         </div>
         <div class="work-card-bottom">
@@ -150,33 +172,18 @@
           <div class="work-card-arrow">↗</div>
         </div>
       </a>
-      <a class="work-card reveal reveal-delay-1"
+      <a class="work-card reveal reveal-delay-4"
          href="https://www.behance.net/gallery/253132045/Boston-Voter-App-%28revised%29?" target="_blank"
          data-preview="previews/boston-voter-app.png"
          data-preview-label="Boston Voter App · React">
         <div class="work-card-hover-text">BVA</div>
         <div class="work-card-top">
-          <span class="work-card-number">03</span>
+          <span class="work-card-number">04</span>
           <span class="work-card-tag">Civic Tech · React</span>
         </div>
         <div class="work-card-bottom">
           <div class="work-card-title">Boston Voter App</div>
           <div class="work-card-desc">Civic platform connecting Boston residents with municipal, state & federal officials — with voter registration & polling tools.</div>
-          <div class="work-card-arrow">↗</div>
-        </div>
-      </a>
-      <a class="work-card reveal reveal-delay-2"
-         href="https://github.com/RaisinBranLvr/cs411-thrift-store.git" target="_blank"
-         data-preview="previews/deadstock.jpg"
-         data-preview-label="Deadstock · TypeScript">
-        <div class="work-card-hover-text">DSK</div>
-        <div class="work-card-top">
-          <span class="work-card-number">04</span>
-          <span class="work-card-tag">Sustainability · Typescript</span>
-        </div>
-        <div class="work-card-bottom">
-          <div class="work-card-title">Deadstock</div>
-          <div class="work-card-desc">Thrifting platform gamifying environmental impact through CO₂ savings tracking — connecting sustainable shoppers with curated fashion.</div>
           <div class="work-card-arrow">↗</div>
         </div>
       </a>
@@ -272,6 +279,7 @@
         <div class="skill-block-title">Development</div>
         <div class="skill-tags">
           <span class="skill-tag">React.js</span>
+          <span class="skill-tag">AngularJS</span>
           <span class="skill-tag">TypeScript</span>
           <span class="skill-tag">JavaScript</span>
           <span class="skill-tag">HTML & CSS</span>
@@ -319,6 +327,22 @@
     <div class="footer-copy">© 2026 Chloe M. Studio · Brooklyn, NY · All rights reserved</div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Mobile bottom nav -->
+  <nav class="dock" id="dock" aria-label="Page sections">
+    <div class="dock-panel" id="dock-panel">
+      <a href="#home">Home</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="services.html">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="dock-bar">
+      <a href="#home" class="dock-logo">Chloe <em>M.</em></a>
+      <button class="dock-btn" id="dock-btn" aria-expanded="false" aria-controls="dock-panel"><span>Menu</span></button>
+    </div>
+  </nav>
+
+  <script src="js/script.js"></script>
 </body>
 </html>

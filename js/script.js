@@ -9,21 +9,28 @@ const cursor = document.getElementById('cursor');
 const cursorRing = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top  = my + 'px';
-});
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+let ringRunning = false;
 
 function animateRing() {
   rx += (mx - rx) * 0.12;
   ry += (my - ry) * 0.12;
   cursorRing.style.left = rx + 'px';
   cursorRing.style.top  = ry + 'px';
+  // stop the loop once the ring has caught up; mousemove restarts it
+  if (Math.abs(mx - rx) < 0.1 && Math.abs(my - ry) < 0.1) { ringRunning = false; return; }
   requestAnimationFrame(animateRing);
 }
-animateRing();
+
+if (finePointer) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+    if (!ringRunning) { ringRunning = true; requestAnimationFrame(animateRing); }
+  }, { passive: true });
+}
 
 // =================================
 // Preloader
@@ -44,9 +51,15 @@ setTimeout(() => {
 // =================================
 const nav = document.getElementById('main-nav');
 
+let navTicking = false;
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
+  if (navTicking) return;
+  navTicking = true;
+  requestAnimationFrame(() => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+    navTicking = false;
+  });
+}, { passive: true });
 
 // =================================
 // Scroll Reveal
@@ -70,13 +83,42 @@ reveals.forEach(el => revealObserver.observe(el));
 // =================================
 // Smooth Scroll for Anchor Links
 // =================================
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let scrollRaf = null;
+
+// Ease-in-out cubic; duration scales with distance so short hops feel quick, long ones stay graceful
+function smoothScrollTo(targetY) {
+  cancelAnimationFrame(scrollRaf);
+  const startY = window.scrollY;
+  const dist = targetY - startY;
+  if (!dist) return;
+  if (reduceMotion.matches) { window.scrollTo(0, targetY); return; }
+  const duration = Math.min(1400, Math.max(700, Math.abs(dist) * 0.45));
+  const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  let t0 = null;
+  function step(ts) {
+    if (t0 === null) t0 = ts;
+    const p = Math.min((ts - t0) / duration, 1);
+    window.scrollTo(0, startY + dist * ease(p));
+    if (p < 1) scrollRaf = requestAnimationFrame(step);
+  }
+  scrollRaf = requestAnimationFrame(step);
+}
+
+// Any user input takes over from the animation, so it never fights the finger or wheel
+['wheel', 'touchstart', 'keydown'].forEach(ev =>
+  window.addEventListener(ev, () => cancelAnimationFrame(scrollRaf), { passive: true })
+);
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    const id = anchor.getAttribute('href');
+    if (id === '#') { e.preventDefault(); return; }   // placeholder links do nothing
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    smoothScrollTo(id === '#home' ? 0 : target.getBoundingClientRect().top + window.scrollY);
+    history.replaceState(null, '', id);
   });
 });
 
@@ -185,4 +227,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       // If it's already active, a second tap follows through with the default link navigation
     });
   });
+})();
+
+// =================================
+// Mobile Dock (bottom nav) — runs on any page that has #dock
+// =================================
+(function () {
+  const dock = document.getElementById('dock');
+  if (!dock) return;
+  const btn   = document.getElementById('dock-btn');
+  const label = btn.querySelector('span');
+  const links = dock.querySelectorAll('.dock-panel a[href^="#"]');
+
+  function setOpen(open) {
+    dock.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+    label.textContent = open ? 'Close' : 'Menu';
+  }
+
+  btn.addEventListener('click', () => setOpen(!dock.classList.contains('open')));
+  links.forEach(a => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('click', e => { if (!dock.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+
+  // Highlight the section currently in view
+  const map = new Map();
+  links.forEach(a => {
+    const sec = document.querySelector(a.getAttribute('href'));
+    if (sec) map.set(sec, a);
+  });
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      links.forEach(l => l.classList.remove('active'));
+      map.get(entry.target).classList.add('active');
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  map.forEach((_, sec) => spy.observe(sec));
 })();

@@ -20,7 +20,7 @@
   
   html {
     font-size: 62.5%;
-    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
   }
   
@@ -236,6 +236,7 @@
      ================================= */
   .hero {
     min-height: 100vh;
+    min-height: 100svh;
     padding: 12rem 3.2rem 6rem;
     display: flex;
     flex-direction: column;
@@ -900,7 +901,7 @@
   .footer-copy {
     font-size: 0.75rem;
     letter-spacing: 0.2em;
-    color: rgba(245, 230, 209, 0.3);
+    color: rgba(60, 58, 58, 0.7);
     text-transform: uppercase;
   }
 
@@ -987,6 +988,8 @@
     transition: opacity 0.9s cubic-bezier(.215,.61,.355,1), transform 0.9s cubic-bezier(.215,.61,.355,1);
   }
   
+  .reveal { will-change: opacity, transform; }
+  .reveal.visible { will-change: auto; }
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
@@ -1052,4 +1055,83 @@
     .cursor-ring {
         display: none;
     }
+}
+
+/* =================================
+   Mobile dock (shared by every page)
+   ================================= */
+.dock { display: none; }
+
+@media (max-width: 900px) {
+  footer { padding-bottom: 10rem; }
+
+   
+     .dock {
+       display: block;
+       position: fixed;
+       left: 1.2rem; right: 1.2rem;
+       bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+       z-index: 200;
+     }
+     .dock-bar {
+       display: flex; align-items: center; justify-content: space-between;
+       background: var(--ink);
+       border-radius: 25px;
+       padding: 1.2rem 1.2rem 1.2rem 2.2rem;
+       box-shadow: 0 12px 40px rgba(60, 58, 58, .25), 0 2px 8px rgba(60, 58, 58, .12);
+     }
+     .dock-logo {
+       font-family: 'Playfair Display', serif;
+       font-weight: 900; font-style: italic;
+       font-size: 2.2rem; letter-spacing: -.02em;
+       color: var(--blush); text-decoration: none;
+     }
+     .dock-logo em { font-style: normal; color: var(--deep); }
+     .dock-btn {
+       background: var(--deep);
+       color: var(--blush);
+       border: none;
+       border-radius: 25px;
+       padding: 1.2rem 2.4rem;
+       font-family: 'DM Mono', monospace;
+       font-size: 1rem; letter-spacing: .2em; text-transform: uppercase;
+       transition: background .3s ease;
+     }
+     .dock.open .dock-btn { background: var(--pink); }
+   
+     .dock-panel {
+       position: absolute; left: 0; right: 0; bottom: calc(100% + .8rem);
+       background: var(--ink);
+       border-radius: 25px;
+       padding: 1.2rem 2.2rem;
+       box-shadow: 0 12px 40px rgba(60, 58, 58, .25);
+       opacity: 0; visibility: hidden;
+       transform: translateY(18px) scale(.98);
+       transform-origin: bottom center;
+       transition: opacity .3s cubic-bezier(.215,.61,.355,1), transform .3s cubic-bezier(.215,.61,.355,1), visibility .3s;
+     }
+     .dock.open .dock-panel { opacity: 1; visibility: visible; transform: none; }
+   
+     .dock-panel a {
+       display: block;
+       font-family: 'Playfair Display', serif;
+       font-weight: 900; font-style: italic;
+       font-size: 3rem; letter-spacing: -.02em; line-height: 1;
+       color: var(--blush); text-decoration: none;
+       padding: 1.6rem 0;
+       border-bottom: 1px solid rgba(245, 230, 209, .15);
+       transition: color .3s ease;
+     }
+     .dock-panel a.active { color: var(--deep); }
+     .dock-panel .dock-home {
+       font-family: 'DM Mono', monospace; font-style: normal; font-weight: 400;
+       font-size: 1rem; letter-spacing: .3em; text-transform: uppercase;
+       color: var(--rose); border-bottom: none; padding-bottom: .8rem;
+     }
+     .dock-btn:focus-visible, .dock-panel a:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-panel { transition: none; }
+  .reveal { transition: none; opacity: 1; transform: none; }
 }

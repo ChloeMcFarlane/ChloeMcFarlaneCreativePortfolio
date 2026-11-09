@@ -1,0 +1,209 @@
+/* =================================
+   Services page — extends styles.css
+   (uses its :root tokens; 1rem = 10px)
+   ================================= */
+
+   .svc-intro { padding-top: 18rem; padding-bottom: 10rem; background: linear-gradient(135deg, var(--paper) 0%, #edd5c5 70%, var(--rose) 100%); }
+   .svc-intro .section-title { margin-bottom: 3.2rem; }
+   .svc-lede {
+     font-family: 'Bodoni Moda', serif;
+     font-size: 2rem;
+     line-height: 1.5;
+     max-width: 62rem;
+     color: var(--ink);
+     opacity: .8;
+     margin-bottom: 4.8rem;
+   }
+   
+   .svc-section#custom   { background: var(--blush); }
+   .svc-section#platforms { background: var(--rose); }
+   .svc-section { padding-top: 8rem; padding-bottom: 8rem; }
+   .svc-section .section-label { margin-bottom: 3.2rem; }
+   
+   /* ---- Service container ---- */
+   .svc-card {
+     background: var(--paper);
+     border: 3px solid var(--ink);
+     border-radius: 25px;
+     padding: 16px;
+     overflow: hidden;
+   }
+   
+   .svc-head {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 6rem;
+     align-items: end;
+     padding: 2.4rem 2.4rem 3.2rem;
+   }
+   .svc-title {
+     font-family: 'Playfair Display', serif;
+     font-weight: 900;
+     font-size: clamp(3.6rem, 5.5vw, 7rem);
+     letter-spacing: -0.03em;
+     line-height: .95;
+     color: var(--ink);
+   }
+   .svc-title em { font-style: italic; color: var(--deep); }
+   .svc-text {
+     font-family: 'Bodoni Moda', serif;
+     font-size: 1.7rem;
+     line-height: 1.55;
+     color: var(--ink);
+     opacity: .75;
+     max-width: 52rem;
+   }
+   
+   .svc-sub {
+     font-family: 'Playfair Display', serif;
+     font-style: italic;
+     font-size: 1.8rem;
+     color: var(--mid);
+     padding: 0 2.4rem;
+     margin-bottom: 1rem;
+   }
+   .svc-view-label {
+     font-size: 1rem;
+     letter-spacing: .4em;
+     text-transform: uppercase;
+     color: var(--ink);
+     padding: 0 2.4rem;
+     margin-bottom: 1.6rem;
+   }
+   
+   /* ---- Scrollable images: clipped by the container, 1rem inset on every side ---- */
+   .svc-viewer {
+     background: var(--blush);
+     border-radius: 12px;
+     overflow: hidden;           /* nothing can bleed past the container */
+   }
+   .svc-scroller {
+     display: flex;
+     gap: 1.6rem;
+     padding: 1rem;              /* 1rem breathing room all round */
+     overflow-x: auto;
+     overflow-y: hidden;
+     scroll-snap-type: x mandatory;
+     scroll-padding: 0 1rem;
+     overscroll-behavior-x: contain;
+     -webkit-overflow-scrolling: touch;
+     scrollbar-width: thin;
+     scrollbar-color: var(--deep) transparent;
+   }
+   .svc-scroller::-webkit-scrollbar { height: 6px; }
+   .svc-scroller::-webkit-scrollbar-thumb { background: var(--deep); border-radius: 6px; }
+   .svc-scroller:focus-visible { outline: 2px solid var(--deep); outline-offset: -2px; }
+   
+   .svc-item { flex: 0 0 44rem; scroll-snap-align: start; }
+   .svc-item img, .svc-ph {
+     display: block;
+     width: 100%;
+     aspect-ratio: 4 / 3;
+     object-fit: cover;
+     border-radius: 10px;
+     background: var(--pink);
+   }
+   .svc-ph {
+     display: flex; align-items: center; justify-content: center;
+     font-size: 1rem; letter-spacing: .3em; text-transform: uppercase;
+     color: var(--mid);
+     border: 1px dashed var(--mid);
+     background: var(--paper);
+   }
+   .svc-item figcaption {
+     font-size: 1rem;
+     letter-spacing: .25em;
+     text-transform: uppercase;
+     color: var(--mid);
+     padding: 1.2rem .4rem .4rem;
+   }
+   
+   /* ---- Approach ---- */
+   .svc-approach { background: var(--paper); }
+   .svc-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+   .svc-col { padding: 4rem; border: 1px solid rgba(110, 46, 52, .2); }
+   .svc-col h3 {
+     font-family: 'Playfair Display', serif;
+     font-weight: 700; font-size: 2.8rem; letter-spacing: -.02em;
+     margin-bottom: 2.4rem; color: var(--ink);
+   }
+   .svc-col li {
+     list-style: none;
+     font-family: 'Bodoni Moda', serif;
+     font-size: 1.7rem; line-height: 1.4;
+     padding: 1.4rem 0;
+     border-top: 1px solid rgba(110, 46, 52, .15);
+     color: var(--ink); opacity: .75;
+   }
+   .svc-col-mine { background: var(--deep); border-color: var(--deep); }
+   .svc-col-mine h3, .svc-col-mine li { color: var(--blush); }
+   .svc-col-mine li { opacity: .95; border-color: rgba(245, 230, 209, .3); }
+   
+   @media (max-width: 900px) {
+     .svc-intro { padding-top: 13rem; }
+     .svc-head { grid-template-columns: 1fr; gap: 2rem; padding: 1.6rem 1.2rem 2.4rem; }
+     .svc-sub, .svc-view-label { padding: 0 1.2rem; }
+     .svc-item { flex-basis: 78vw; }
+     .svc-compare { grid-template-columns: 1fr; }
+     .svc-col { padding: 2.8rem; }
+   }
+
+/* ---- Launch cards: each example is a link to the live site ---- */
+.svc-item { display: block; color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.svc-item figure { margin: 0; }
+.svc-media { position: relative; border-radius: 10px; overflow: hidden; }
+.svc-media img, .svc-media .svc-ph {
+  transition: transform .9s cubic-bezier(.215,.61,.355,1);
+  -webkit-user-drag: none; user-select: none;
+}
+.svc-screen {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(250,245,240,.55), rgba(226,150,178,.4));
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity .55s cubic-bezier(.215,.61,.355,1);
+}
+.svc-pop {
+  background: var(--ink); color: var(--blush);
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem; letter-spacing: .25em; text-transform: uppercase;
+  padding: 1.4rem 2.6rem; border-radius: 25px;
+  box-shadow: 0 12px 40px rgba(60,58,58,.25);
+  opacity: 0; transform: translateY(14px) scale(.96);
+  transition: opacity .45s ease .06s, transform .55s cubic-bezier(.215,.61,.355,1) .06s;
+}
+.svc-pop i { font-style: normal; display: inline-block; margin-left: .8rem; transition: transform .3s ease; }
+.svc-item:focus-visible { outline: 2px solid var(--deep); outline-offset: 4px; border-radius: 10px; }
+.svc-item:focus-visible .svc-screen, .svc-item:focus-visible .svc-pop { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .svc-item:hover .svc-screen { opacity: 1; }
+  .svc-item:hover .svc-pop { opacity: 1; transform: none; }
+  .svc-item:hover .svc-pop i { transform: translate(3px,-3px); }
+  .svc-item:hover .svc-media img, .svc-item:hover .svc-media .svc-ph { transform: scale(1.04); }
+}
+/* Touch: no hover, so the chip is always visible and one tap launches */
+@media (hover: none) {
+  .svc-screen { opacity: 1; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; align-items: flex-end; justify-content: flex-end; padding: 1rem; }
+  .svc-pop { opacity: 1; transform: none; padding: .9rem 1.6rem; font-size: .9rem; }
+}
+
+/* ---- Rates CTA ---- */
+.svc-rates { background: var(--deep); padding-top: 10rem; padding-bottom: 10rem; }
+.svc-rates .section-label { color: rgba(245,230,209,.8); }
+.svc-rates .section-label::after { background: var(--blush); }
+.svc-rates-title {
+  font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic;
+  font-size: clamp(4.4rem, 8vw, 11rem); line-height: .9; letter-spacing: -0.03em;
+  color: var(--blush); margin-bottom: 3.2rem;
+}
+.svc-rates-title em { font-style: normal; color: var(--ink); }
+.svc-rates-text {
+  font-family: 'Bodoni Moda', serif; font-size: 2rem; line-height: 1.5;
+  max-width: 56rem; color: var(--ink); margin-bottom: 4.8rem;
+}
+.svc-rates .hero-cta { flex-wrap: wrap; }
+.svc-rates .btn-primary { background: var(--ink); color: var(--blush); }
+.svc-rates .btn-primary:hover { background: var(--blush); color: var(--ink); }
+.svc-rates .btn-outline { border-color: var(--blush); color: var(--blush); }
+.svc-rates .btn-outline:hover { background: var(--blush); color: var(--ink); }
